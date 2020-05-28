@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\MarqueRepository;
+use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=MarqueRepository::class)
+ * @ORM\Entity(repositoryClass=CategorieRepository::class)
  */
-class Marque
+class Categorie
 {
     /**
      * @ORM\Id()
@@ -22,17 +22,12 @@ class Marque
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nomMarque;
+    private $nomCategorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="marque")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorie")
      */
     private $produits;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $logo;
 
     public function __construct()
     {
@@ -44,14 +39,14 @@ class Marque
         return $this->id;
     }
 
-    public function getNomMarque(): ?string
+    public function getNomCategorie(): ?string
     {
-        return $this->nomMarque;
+        return $this->nomCategorie;
     }
 
-    public function setNomMarque(string $nomMarque): self
+    public function setNomCategorie(string $nomCategorie): self
     {
-        $this->nomMarque = $nomMarque;
+        $this->nomCategorie = $nomCategorie;
 
         return $this;
     }
@@ -68,7 +63,7 @@ class Marque
     {
         if (!$this->produits->contains($produit)) {
             $this->produits[] = $produit;
-            $produit->setMarque($this);
+            $produit->setCategorie($this);
         }
 
         return $this;
@@ -79,22 +74,10 @@ class Marque
         if ($this->produits->contains($produit)) {
             $this->produits->removeElement($produit);
             // set the owning side to null (unless already changed)
-            if ($produit->getMarque() === $this) {
-                $produit->setMarque(null);
+            if ($produit->getCategorie() === $this) {
+                $produit->setCategorie(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    public function setLogo(?string $logo): self
-    {
-        $this->logo = $logo;
 
         return $this;
     }
