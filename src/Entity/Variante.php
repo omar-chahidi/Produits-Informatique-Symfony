@@ -55,6 +55,11 @@ class Variante
      */
     private $ligneDeCommandes;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $qteStoque;
+
     public function __construct()
     {
         $this->ligneDeCommandes = new ArrayCollection();
@@ -164,6 +169,18 @@ class Variante
                 $ligneDeCommande->setVariante(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQteStoque(): ?int
+    {
+        return $this->qteStoque;
+    }
+
+    public function setQteStoque(int $qteStoque): self
+    {
+        $this->qteStoque = $qteStoque;
 
         return $this;
     }
