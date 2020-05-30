@@ -107,8 +107,8 @@ insert into image (id, nom_image, master, produit_id) VALUES
 (3, 'ZenBook_Pro_Duo_3.jpg', 0, 1),	
 	
 (4, 'Pavilion_Gaming.jpg', 1, 2),	
-(5, 'Pavilion_Gaming.jpg_2', 0, 2),	
-(6, 'Pavilion_Gaming.jpg_3', 0, 2),
+(5, 'Pavilion_Gaming_2.jpg', 0, 2),	
+(6, 'Pavilion_Gaming_3.jpg', 0, 2),
 
 (7, 'GP72M_REX_Leopard_Pro.jpg', 1, 3),	
 (8, 'GP72M_REX_Leopard_Pro_2.jpg', 0, 3),	
@@ -163,15 +163,17 @@ insert into image (id, nom_image, master, produit_id) VALUES
 (41, 'AirPods_1.jpg', 1, 15),
 (42, 'AirPods_2.jpg', 0, 15),
 
-(43, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_1.jpg', 1, 16),
-(44, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_2.jpg', 0, 16),
-(45, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_3.jpg', 0, 16),
-(46, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_4.jpg', 0, 16),
+(43, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_1.jpg', 1, 17),
+(44, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_2.jpg', 0, 17),
+(45, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_3.jpg', 0, 17),
+(46, 'Casque_Sans_Fil_Bluetooth_avec_micro_intégré_et_appels_mains_libres_4.jpg', 0, 17),
 
-(47, 'Chargeur_Rapide_Type_C_1',  1, 17),
-(48, 'Chargeur_Rapide_Type_C_2',  0, 17),
-(49, 'Chargeur_Rapide_Type_C_3',  0, 17)
+(47, 'Chargeur_Rapide_Type_C_1.jpg',  1, 16),
+(48, 'Chargeur_Rapide_Type_C_2.jpg',  0, 16),
+(49, 'Chargeur_Rapide_Type_C_3.jpg',  0, 16)
 ;
+
+
 
 -- Contenu de la table variante
 truncate table variante;
