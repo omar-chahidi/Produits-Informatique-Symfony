@@ -62,10 +62,17 @@ class ProduitRepository extends ServiceEntityRepository
             // Jointure avec la table Marque
             ->leftJoin('p.marque', 'ma')
             ->addSelect('ma')
+            // Jointure avec la table Variante
+            ->leftJoin('p.variantes', 'va')
+            ->addSelect('va')
         ;
 
         // Filtrer sur les images MASTER
         $qb->where($qb->expr()->in('im.master', 1));
+
+        // Filtrer sur les prix MASTER
+        $qb->andWhere($qb->expr()->in('va.master', 1));
+
 
         // filtrer sur une gategorie
         //$qb->andWhere($qb->expr()->in('ca.id', 1));

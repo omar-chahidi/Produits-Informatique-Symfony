@@ -32,8 +32,20 @@ class ProduitController extends AbstractController
         //$articles = $repo->findAll();
 
         $articles = $repo->listeProduitsPourChaqueCategorie($categorie);
-
         dump($articles);
+        /*
+        foreach ($articles as $unArticle) {
+            var_dump($unArticle->getNomProduit());
+            foreach ($unArticle->getVariantes() as $variante){
+                var_dump($variante->getMaster());
+                var_dump($variante->getPrix());
+            }
+            foreach ($unArticle->getImages() as $photo){
+                var_dump($photo->getMaster());
+                var_dump($photo->getNomImage());
+            }
+        }
+        */
 
         return $this->render('produit/index.html.twig', [
             'articles' => $articles,

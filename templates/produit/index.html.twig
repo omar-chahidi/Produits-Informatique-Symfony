@@ -18,15 +18,26 @@
                 <br> <br> <br>
                 <p>Marque : {{ article.marque.nomMarque }}</p>
                 <p>Categorie : {{ article.categorie.nomCategorie }}</p>
+                {% for variante in article.getVariantes() %}
+                    <p>Core : {{ variante.core }}</p>
+                    <p>Mémoire : {{ variante.memoire }}</p>
+                    <p>Espace disuqe : {{ variante.espaceDisque }}</p>
+                    <p>Couleur : {{ variante.couleur }}</p>
+                    <p>Stock : {{ variante.qteStoque }}</p>
+                    <p>Prix : {{ variante.prix }} €</p>
+                    <p>Remise : {{ variante.remise }} %</p>
+                    <p>Nouveau prix : {{ variante.prix - (variante.prix * variante.remise)/100 }} €</p>
+                {% endfor %}
 
+                {#
                 <p>Core : {{ article.getVariantes()[0].core }}</p>
                 <p>Mémoire : {{ article.getVariantes()[0].memoire }}</p>
                 <p>Espace disuqe : {{ article.getVariantes()[0].espaceDisque }}</p>
                 <p>Couleur : {{ article.getVariantes()[0].couleur }}</p>
                 <p>Stock : {{ article.getVariantes()[0].qteStoque }}</p>
-                <p>Prix : {{ article.getVariantes()[0].prix }}</p>
+                <p>Prix : {{ article.getVariantes()[0].prix }} euros</p>
 
-                {#
+
                 <table class="table table-bordered table-striped">
                     <tr>
                         <th>Core</th>
@@ -52,7 +63,7 @@
 
 
                 <div>
-                    <a href="#" class="btn btn-info" style="color: #F5871F">Lire la suite</a>
+                    <a href="#" class="btn btn-warning" style="color: white"><strong>D É C O U V R I R</strong></a>
                 </div>
 
                 <hr>
