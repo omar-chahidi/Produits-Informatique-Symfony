@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Ajouter un nouveau produit</h2>
+    {{ form_start(formulaireProduit) }}
+    {{ form_row(formulaireProduit.nomProduit, {'label': 'Nom', 'attr': {'placeholder': 'Nom ...'}}) }}
+    {{ form_row(formulaireProduit.categorie, {'label': 'Catégorie'}) }}
+    {{ form_row(formulaireProduit.marque, {'label': 'La marque'}) }}
+    {{ form_row(formulaireProduit.description, {'label': 'Déscription', 'attr': {'placeholder': 'déscription ...'}}) }}
+    {{ form_row(formulaireProduit.motRecherche, {'label': 'Mot de recherche', 'attr': {'placeholder': 'mot de recherche ...'}}) }}
+    <button type="submit" class="btn btn-success">
+        Ajouter le produit
+    </button>
+    {{ form_end(formulaireProduit) }}
+{% endblock %}

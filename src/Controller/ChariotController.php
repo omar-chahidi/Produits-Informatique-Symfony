@@ -17,8 +17,7 @@ class ChariotController extends AbstractController
     {
         // récuperation de mon pannier
         $panier = $session->get('panier', []);
-
-        dd($panier);
+        //dd($panier);
 
         // création un tableau qui contient plus d'information à partir de mon tableau panier
         $panierAvecInfo = [];
@@ -29,7 +28,7 @@ class ChariotController extends AbstractController
                 'quantite' => $quantite,
             ];
         }
-        dd($panierAvecInfo);
+        //dd($panierAvecInfo);
         //dd($panierAvecInfo[0]['produit']->getPrix());
 
         // Calcul du total globale

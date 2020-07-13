@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\Produit;
 use App\Entity\Variante;
+use App\Form\ProduitType;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,7 +54,7 @@ class ProduitController extends AbstractController
     }
 
     /**
-     *@Route("/produit/{id}", name="afficher_un_produit")
+     *@Route("/produit/{id}", name="afficher_un_produit", requirements={"id"="\d+"})
      */
     public function afficherUnProduit($id){
         // Trouver le produit séléctionner
@@ -74,6 +76,31 @@ class ProduitController extends AbstractController
             'unArticle' => $unArticle,
             'imagesProduit' => $imagesProduit,
             'varianteProduit' => $varianteProduit
+        ]);
+    }
+
+    /**
+     * @Route("/produit/ajouter", name="ajouter_produit")
+     * php bin/console make:form ProduitType
+     */
+    public function formulaire(Request $request) {
+
+        $produit = new Produit();
+
+        // Création du formulaire
+        $formulaire = $this->createForm(ProduitType::class, $produit);
+
+        // Annalyser la requette http
+        $formulaire->handleRequest($request);
+        if($formulaire->isSubmitted() && $formulaire->isValid()) {
+            dump($produit);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($produit);
+            $em->flush();
+        }
+
+        return $this->render('produit/ajouterProduit.html.twig', [
+            'formulaireProduit' => $formulaire->createView()
         ]);
     }
 }
