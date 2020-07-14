@@ -82,7 +82,7 @@ class ProduitController extends AbstractController
     /*
      * ADMINISTATION
      */
-    
+
     /**
      * @Route("/produit/lister", name="afficher_produits")
      */
@@ -126,5 +126,15 @@ class ProduitController extends AbstractController
             'formulaireProduit' => $formulaire->createView(),
             'produitExist' => $produit->getId() !== null
         ]);
+    }
+
+    /**
+     * @Route("/produit/{id}/supprimer", name="supprimer_produit")
+     */
+    public function supprimerUnProduit(Produit $produit){
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($produit);
+        $entityManager->flush();
+        return $this->redirectToRoute('afficher_produits');
     }
 }

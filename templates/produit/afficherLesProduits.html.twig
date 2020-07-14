@@ -7,9 +7,10 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table table-bordered table-striped">
         <thead>
         <tr>
+            <th>N°</th>
             <th>Produit</th>
             <th>Catégorie</th>
             <th>Marque</th>
@@ -21,6 +22,7 @@
         <tbody>
             {% for produit in listeDesProduits %}
                 <tr>
+                    <td>{{ produit.id }}</td>
                     <td>{{ produit.nomProduit }}</td>
                     <td>{{ produit.categorie.nomCategorie }}</td>
                     <td>{{ produit.marque.nomMarque }}</td>
@@ -28,11 +30,11 @@
                     <td>{{ produit.motRecherche }}</td>
                     <td>
                         <div class="btn-group">
-                            <div class="btn m-1">
+                            <div class="btn mr-1">
                                 <a href="{{ path('modifier_produit', {'id': produit.id}) }}" class="btn btn-warning">Modifier</a>
                             </div>
                             <div class="btn mr-1">
-                                <a href="#" class="btn btn-danger">Supprimer</a>
+                                <a href="{{ path('supprimer_produit', {'id': produit.id}) }}" class="btn btn-danger">Supprimer</a>
                             </div>
                         </div>
                     </td>
