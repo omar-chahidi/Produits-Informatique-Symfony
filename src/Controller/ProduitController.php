@@ -81,11 +81,14 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/produit/ajouter", name="ajouter_produit")
+     * @Route("/produit/{id}/modifier", name="modifier_produit")
      * php bin/console make:form ProduitType
      */
-    public function formulaire(Request $request) {
+    public function formulaireAjoutEtModification(Produit $produit = null, Request $request) {
 
-        $produit = new Produit();
+        if( !$produit ){
+            $produit = new Produit();
+        }
 
         // Création du formulaire
         $formulaire = $this->createForm(ProduitType::class, $produit);
@@ -99,8 +102,9 @@ class ProduitController extends AbstractController
             $em->flush();
         }
 
-        return $this->render('produit/ajouterProduit.html.twig', [
-            'formulaireProduit' => $formulaire->createView()
+        return $this->render('produit/ajouterModifierProduit.html.twig', [
+            'formulaireProduit' => $formulaire->createView(),
+            'produitExist' => $produit->getId() !== null
         ]);
     }
 }
