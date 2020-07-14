@@ -79,12 +79,30 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    /*
+     * ADMINISTATION
+     */
+    
+    /**
+     * @Route("/produit/lister", name="afficher_produits")
+     */
+    public function afficherLesProduits() {
+        $repository = $this->getDoctrine()->getRepository(Produit::class);
+        $produitListe = $repository->findAll();
+
+        dump($produitListe);
+
+        return $this->render('produit/afficherLesProduits.html.twig', [
+            'listeDesProduits' => $produitListe
+        ]);
+    }
+
     /**
      * @Route("/produit/ajouter", name="ajouter_produit")
      * @Route("/produit/{id}/modifier", name="modifier_produit")
      * php bin/console make:form ProduitType
      */
-    public function formulaireAjoutEtModification(Produit $produit = null, Request $request) {
+    public function ajouterModifierProduit(Produit $produit = null, Request $request) {
 
         if( !$produit ){
             $produit = new Produit();
@@ -100,6 +118,8 @@ class ProduitController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
+
+            return $this->redirectToRoute('afficher_produits');
         }
 
         return $this->render('produit/ajouterModifierProduit.html.twig', [
