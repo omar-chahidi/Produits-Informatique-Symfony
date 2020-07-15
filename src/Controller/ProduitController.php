@@ -79,8 +79,9 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    /*
-     * ADMINISTATION
+    /* -----------------------------------------------------------------------------------------
+     * ------------------------------------- ADMINISTATION -------------------------------------
+     * -----------------------------------------------------------------------------------------
      */
 
     /**
@@ -136,5 +137,25 @@ class ProduitController extends AbstractController
         $entityManager->remove($produit);
         $entityManager->flush();
         return $this->redirectToRoute('afficher_produits');
+    }
+
+    /**
+     * @Route("/produit/{id}/ajouterInformations", name="ajouter_informations_produit")
+     */
+    public function ajouterInformations(Produit $produit) {
+        $depotProduit = $this->getDoctrine()->getRepository(Produit::class);
+        $monArticle = $depotProduit->find($produit);
+
+        $depotImage = $this->getDoctrine()->getRepository(Image::class);
+        $imagesDeMonProduit = $depotImage->findBy(array('produit' => $monArticle));
+
+        $depotVariante = $this->getDoctrine()->getRepository(Variante::class);
+        $variantesDeMonProduit = $depotVariante->findBy(array('produit' => $monArticle));
+
+        return $this->render('produit/ajouterInformations.html.twig', [
+            'unArticle' => $monArticle,
+            'imagesProduit' => $imagesDeMonProduit,
+            'variantesProduit' => $variantesDeMonProduit
+        ]);
     }
 }

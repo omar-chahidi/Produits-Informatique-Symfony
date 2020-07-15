@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-2 mt-2">
+        <div class="col text-right">
+            <a href="{{ path('afficher_produits') }}" class="btn btn-primary">Lister les produits</a>
+            <a href="{{ path('afficher_produits') }}" class="btn btn-info">Ajouter une variante</a>
+            <a href="{{ path('afficher_produits') }}" class="btn btn-secondary">Ajouter une photo</a>
+        </div>
+    </div>
+
+    <article>
+        <h2>{{ unArticle.nomProduit }}</h2>
+        <div class="container">
+            <div class="row">
+                {% for image in imagesProduit %}
+                    <div>
+                        <a href="/ImageProduitsInformatique/{{ image.getNomImage() }}" class="thumbnail">
+                            <img src="/ImageProduitsInformatique/{{ image.getNomImage() }}"
+                                 alt="{{ image.nomImage }}"
+                                 width="200" height="200"
+                            />
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <p>{{ unArticle.description | raw }}</p>
+        <hr>
+        {# <p>{{ unArticle.motRecherche }}</p> #}
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Core</th>
+                <th>Mémoire</th>
+                <th>Espace disuqe</th>
+                <th>Couleur</th>
+                <th>Stock</th>
+                <th>Prix</th>
+                <th>Remise</th>
+                <th>Nouveau prix</th>
+                <th>Action</th>
+            </tr>
+
+            {% for variante in variantesProduit %}
+                <tr>
+                    <td>{{ variante.core}}</td>
+                    <td>{{ variante.memoire }}</td>
+                    <td>{{ variante.espaceDisque }}</td>
+                    <td>{{ variante.couleur }}</td>
+                    <td>{{ variante.qteStoque }}</td>
+                    <td>{{ variante.prix }} €</td>
+                    <td>{{ variante.remise }} %</td>
+                    <td>{{ variante.prix - (variante.prix * variante.remise)/100 }} €</td>
+
+                    <td>
+                        <div class="btn-group">
+                            <div class="btn mr-1">
+                                <a href="#" class="btn btn-warning">Modifier {{ unArticle.id }} - {{ variante.id}}</a>
+                            </div>
+                            <div class="btn mr-1">
+                                <a href="#" class="btn btn-danger">Supprimer {{ unArticle.id }} - {{ variante.id}}</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    </article>
+{% endblock %}
