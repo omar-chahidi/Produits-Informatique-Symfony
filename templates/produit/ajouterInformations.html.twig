@@ -4,7 +4,7 @@
     <div class="row mb-2 mt-2">
         <div class="col text-right">
             <a href="{{ path('afficher_produits') }}" class="btn btn-primary">Lister les produits</a>
-            <a href="{{ path('afficher_produits') }}" class="btn btn-info">Ajouter une variante</a>
+            <a href="{{ path('ajouter_variante', {'id': unArticle.id}) }}" class="btn btn-info">Ajouter une variante</a>
             <a href="{{ path('afficher_produits') }}" class="btn btn-secondary">Ajouter une photo</a>
         </div>
     </div>
@@ -56,7 +56,7 @@
                     <td>
                         <div class="btn-group">
                             <div class="btn mr-1">
-                                <a href="#" class="btn btn-warning">Modifier {{ unArticle.id }} - {{ variante.id}}</a>
+                                <a href="{{ path('modifier_variante', {'id': variante.id}) }}" class="btn btn-warning">Modifier {{ unArticle.id }} - {{ variante.id}}</a>
                             </div>
                             <div class="btn mr-1">
                                 <a href="#" class="btn btn-danger">Supprimer {{ unArticle.id }} - {{ variante.id}}</a>

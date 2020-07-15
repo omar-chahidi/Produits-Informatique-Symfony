@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>
+        {% if mode == "ajouterVariante" %}
+            Ajout variante du produit {{ produit.nomProduit }}
+        {% elseif mode == "modifierVariante" %}
+            Modifier variante du produit  {{ produit.nomProduit }}
+        {% endif %}
+    </h2>
+
+    {{ form_start(formulaireVariante) }}
+    {{ form_row(formulaireVariante.prix) }}
+    {{ form_row(formulaireVariante.memoire, {'label': 'Mémoire en Go', 'attr': {'placeholder': 'Mémoire ...'}}) }}
+    {{ form_row(formulaireVariante.core, {'label': 'Core', 'attr': {'placeholder': 'Core ...'}}) }}
+    {{ form_row(formulaireVariante.espaceDisque, {'label': 'Espace disque en Go', 'attr': {'placeholder': 'Espace disque ...'}}) }}
+    {{ form_row(formulaireVariante.couleur, {'label': 'Couleur', 'attr': {'placeholder': 'Couleur ...'}}) }}
+    {{ form_row(formulaireVariante.qteStoque) }}
+    {{ form_row(formulaireVariante.master) }}
+    {{ form_row(formulaireVariante.remise) }}
+
+
+    <button type="submit" class="btn btn-success">
+        {% if mode == "ajouterVariante" %}
+            Ajouter la nouvelle variante
+        {% elseif mode == "modifierVariante" %}
+            Enregistrer les modification
+        {% endif %}
+    </button>
+    {{ form_end(formulaireVariante) }}
+
+{% endblock %}

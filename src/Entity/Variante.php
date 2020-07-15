@@ -97,7 +97,7 @@ class Variante
         return $this->memoire;
     }
 
-    public function setMemoire(?int $memoire): self
+    public function setMemoire(?string $memoire): self
     {
         $this->memoire = $memoire;
 
