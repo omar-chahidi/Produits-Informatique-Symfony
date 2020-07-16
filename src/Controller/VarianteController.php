@@ -16,7 +16,7 @@ class VarianteController extends AbstractController
      */
     public function index()
     {
-        return $this->render('variante/index.html.twig', [
+        return $this->render('variante/telechargerImage.html.twig', [
             'controller_name' => 'VarianteController',
         ]);
     }

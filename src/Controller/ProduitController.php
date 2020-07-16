@@ -48,7 +48,7 @@ class ProduitController extends AbstractController
         }
         */
 
-        return $this->render('produit/index.html.twig', [
+        return $this->render('produit/telechargerImage.html.twig', [
             'articles' => $articles,
         ]);
     }
