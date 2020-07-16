@@ -25,7 +25,7 @@ class VarianteController extends AbstractController
      * php bin/console make:form VarianteType
      * @Route("/variante/{id}/ajouter", name="ajouter_variante")
      */
-    public function ajouterModifierVariante(Produit $produit, Request $request) {
+    public function ajouterVariante(Produit $produit, Request $request) {
 
         dump($produit);
         dump($produit->getCategorie()->getNomCategorie());
@@ -99,6 +99,19 @@ class VarianteController extends AbstractController
             'produit' => $variante->getProduit(),
             'mode' => 'modifierVariante',
             'categorie' => $variante->getProduit()->getCategorie()->getNomCategorie()
+        ]);
+    }
+
+    /**
+     * @Route("/variante/{id}/supprimer", name="supprimer_variante")
+     */
+    public function supprimerVariante(Variante $variante) {
+        $entitemanager = $this->getDoctrine()->getManager();
+        $entitemanager->remove($variante);
+        $entitemanager->flush();
+
+        return $this->redirectToRoute('ajouter_informations_produit', [
+            'id' => $variante->getProduit()->getId()
         ]);
     }
 
