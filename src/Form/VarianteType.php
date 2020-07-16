@@ -37,7 +37,7 @@ class VarianteType extends AbstractType
                 ],
                 //'choice_value' => 'Non'
             ])
-            ->add('remise', IntegerType::class, ["label" => "Remise en %", "attr" => ["min" => "1" , "max" => "90"]])
+            ->add('remise', IntegerType::class, ["label" => "Remise en %", "attr" => ["min" => "0" , "max" => "90"]])
             //->add('produit', EntityType::class, [
             //    'class' =>Produit::class,
             //    'choice_label' => 'id'

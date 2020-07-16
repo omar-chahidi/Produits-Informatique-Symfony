@@ -65,7 +65,8 @@ class VarianteController extends AbstractController
         return $this->render('variante/ajouterModifierVariante.html.twig', [
             'formulaireVariante' => $formulaire->createView(),
             'produit' => $produit,
-            'mode' => 'ajouterVariante'
+            'mode' => 'ajouterVariante',
+            'categorie' => $produit->getCategorie()->getNomCategorie()
         ]);
     }
 
@@ -96,7 +97,8 @@ class VarianteController extends AbstractController
         return $this->render('variante/ajouterModifierVariante.html.twig', [
             'formulaireVariante' => $formulaire->createView(),
             'produit' => $variante->getProduit(),
-            'mode' => 'modifierVariante'
+            'mode' => 'modifierVariante',
+            'categorie' => $variante->getProduit()->getCategorie()->getNomCategorie()
         ]);
     }
 

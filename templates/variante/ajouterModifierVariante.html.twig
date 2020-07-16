@@ -8,12 +8,27 @@
             Modifier variante du produit  {{ produit.nomProduit }}
         {% endif %}
     </h2>
+    <h3>{{ categorie }}</h3>
 
     {{ form_start(formulaireVariante) }}
     {{ form_row(formulaireVariante.prix) }}
-    {{ form_row(formulaireVariante.memoire, {'label': 'Mémoire en Go', 'attr': {'placeholder': 'Mémoire ...'}}) }}
-    {{ form_row(formulaireVariante.core, {'label': 'Core', 'attr': {'placeholder': 'Core ...'}}) }}
-    {{ form_row(formulaireVariante.espaceDisque, {'label': 'Espace disque en Go', 'attr': {'placeholder': 'Espace disque ...'}}) }}
+
+    {% if (categorie == "Smartphones") or (categorie == "Tablettes")  %}
+        {{ form_row(formulaireVariante.memoire, {'label': 'Mémoire en Go', 'attr': {'placeholder': 'Mémoire ...'}}) }}
+        {{ form_row(formulaireVariante.core, {'disabled': 'true', 'label': 'Core'}) }}
+        {{ form_row(formulaireVariante.espaceDisque, {'label': 'Espace disque en Go', 'attr': {'placeholder': 'Espace disque ...'}}) }}
+    {% elseif (categorie == "Accessoires") or (categorie == "Montres connectées") %}
+        {{ form_row(formulaireVariante.memoire, {'disabled': 'true', 'label': 'Mémoire en Go'}) }}
+        {{ form_row(formulaireVariante.core, {'disabled': 'true', 'label': 'Core'}) }}
+        {{ form_row(formulaireVariante.espaceDisque, {'disabled': 'true', 'label': 'Espace disque en Go'}) }}
+
+    {% else %}
+        {{ form_row(formulaireVariante.memoire, {'label': 'Mémoire en Go', 'attr': {'placeholder': 'Mémoire ...'}}) }}
+        {{ form_row(formulaireVariante.core, {'label': 'Core', 'attr': {'placeholder': 'Core ...'}}) }}
+        {{ form_row(formulaireVariante.espaceDisque, {'label': 'Espace disque en Go', 'attr': {'placeholder': 'Espace disque ...'}}) }}
+    {% endif %}
+
+
     {{ form_row(formulaireVariante.couleur, {'label': 'Couleur', 'attr': {'placeholder': 'Couleur ...'}}) }}
     {{ form_row(formulaireVariante.qteStoque) }}
     {{ form_row(formulaireVariante.master) }}
