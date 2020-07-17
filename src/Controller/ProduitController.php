@@ -158,4 +158,5 @@ class ProduitController extends AbstractController
             'variantesProduit' => $variantesDeMonProduit
         ]);
     }
+    
 }
