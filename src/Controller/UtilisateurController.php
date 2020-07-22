@@ -50,10 +50,21 @@ class UtilisateurController extends AbstractController
             $entiteManager = $this->getDoctrine()->getManager();
             $entiteManager->persist($utilisateur);
             $entiteManager->flush();
+
+            // Après une inscription je me dérige vers la route se connecter
+            return $this->redirectToRoute('connexion_utilisateur');
         }
 
         return $this->render('utilisateur/inscrireUtilisateur.html.twig', [
             'formulaireInscriptionUtilisateur' => $formulaireInscriptionUtilisateur->createView()
         ]);
+    }
+
+
+    /**
+     * @Route("/connexion", name="connexion_utilisateur")
+     */
+    public function seConnecter() {
+        return $this->render('utilisateur/seConnecter.html.twig');
     }
 }

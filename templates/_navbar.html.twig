@@ -44,7 +44,7 @@
                     {% if not app.user %}
                         <a class="dropdown-item" href="{{ path('inscription_utilisateur') }}">Inscription</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Connexion</a>
+                        <a class="dropdown-item" href="{{ path('connexion_utilisateur') }}">Connexion</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path('afficher_produits') }}">Administration du site</a>
                     {% else %}
