@@ -48,7 +48,7 @@ class ProduitController extends AbstractController
         }
         */
 
-        return $this->render('produit/index.html.twig', [
+        return $this->render('produit/inscrireUtilisateur.html.twig', [
             'articles' => $articles,
         ]);
     }
@@ -158,5 +158,5 @@ class ProduitController extends AbstractController
             'variantesProduit' => $variantesDeMonProduit
         ]);
     }
-    
+
 }

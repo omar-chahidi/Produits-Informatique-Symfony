@@ -7,10 +7,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+// namespace pour la validation
+use Symfony\Component\Validator\Constraints as Assert;
+
+// Ajouter cette interface pour crypter mes mots de passes
+use Symfony\Component\Security\Core\User\UserInterface;
+
+// Ajouter cette contrainte pour que mon utilisateur soit unique via l'adresse email
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+
+
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="L'email que vous avez indiqué est déjà utilisé !"
+ * )
  */
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -21,16 +36,26 @@ class Utilisateur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3,
+     *      max=50,
+     *     minMessage="Il faut un nom plus que 3 caractères",
+     *     maxMessage="Il faut un nom moin que 5O caractères")
      */
     private $nomUtilisateur;
 
+    //, nullable=true
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3,
+     *      max=50,
+     *     minMessage="Il faut un nom plus que 3 caractères",
+     *     maxMessage="Il faut un nom moin que 5O caractères")
      */
     private $prenomUtilisateur;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $dateDeNaissance;
 
@@ -47,13 +72,37 @@ class Utilisateur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message = "Adresse email '{{ value }}' n'est pas validé")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3, minMessage="Votre mot de passe doit faire minimum 3 caractères")
+     * @Assert\EqualTo(propertyPath="confirmationMDP", message="Vous n'avez pas tappé le même mot de passe")
      */
     private $motDePasse;
+
+    /**
+     * @Assert\EqualTo(propertyPath="motDePasse", message="Vous n'avez pas tappé le même mot de passe")
+     */
+    private $confirmationMDP;
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationMDP()
+    {
+        return $this->confirmationMDP;
+    }
+
+    /**
+     * @param mixed $confirmationMDP
+     */
+    public function setConfirmationMDP($confirmationMDP): void
+    {
+        $this->confirmationMDP = $confirmationMDP;
+    }
 
     /**
      * @ORM\Column(type="date")
@@ -251,5 +300,30 @@ class Utilisateur
         $this->telephone = $telephone;
 
         return $this;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getPassword()
+    {
+        return $this->motDePasse;
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
