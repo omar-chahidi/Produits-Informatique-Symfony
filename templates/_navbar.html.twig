@@ -48,9 +48,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path('afficher_produits') }}">Administration du site</a>
                     {% else %}
-                        <a class="dropdown-item" href="#">#</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Déconnexion</a>
+                        <a class="dropdown-item" href="{{ path('security_logout') }}">Déconnexion</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path('modifier_utilisateur' , {'id': app.user.id}) }}">Modification compte</a>
                     {% endif %}

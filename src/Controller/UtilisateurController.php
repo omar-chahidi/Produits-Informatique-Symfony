@@ -67,4 +67,10 @@ class UtilisateurController extends AbstractController
     public function seConnecter() {
         return $this->render('utilisateur/seConnecter.html.twig');
     }
+
+    /**
+     * @Route("/deconnexion", name="security_logout")
+     */
+    public function logout(){}
+
 }
