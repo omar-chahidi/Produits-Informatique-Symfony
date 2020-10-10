@@ -46,7 +46,7 @@ class ChariotController extends AbstractController
         }
 
 
-        return $this->render('chariot/telechargerImage.html.twig', [
+        return $this->render('chariot/index.html.twig', [
             'items' => $panierAvecInfo,
             'total' => $total
         ]);
@@ -80,6 +80,31 @@ class ChariotController extends AbstractController
 
         return $this->redirectToRoute("chariot_index");
     }
+
+    /**
+     * Enlever un article de mon pannier
+     * @Route("/chariot/soustraire/{id}", name="chariot_soustraire")
+     */
+    public function soustraire($id, SessionInterface $session){
+        //public function ajouter($id, Request $request){
+        // acceder à la session avec symfony avec via une requette (HttpFoundation)
+        //$session = $request->getSession();
+
+        // Definition de mon pannier. Si je n'ai pas de panier mon panier est un tableau vide
+        $panier = $session->get('panier', []);
+
+        // Ajouter le produit. Si le produit existe dans mon panier j'ajoute ++1
+        if( !empty($panier[$id])){
+            $panier[$id]--;
+        }
+
+        // Remettre mon pannier dans ma session
+        $session->set('panier', $panier);
+
+        // Afficher ma page panier
+        return $this->redirectToRoute("chariot_index");
+    }
+
 
     /**
      * Supprimer un produit de mon panier

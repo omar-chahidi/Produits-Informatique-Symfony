@@ -3,6 +3,7 @@
 {% block body %}
     <article>
         <h2>{{ unArticle.nomProduit }}</h2>
+        <h2>{{ unArticle.categorie.nomCategorie }}</h2>
         <div class="container">
             <div class="row">
                 {% for image in imagesProduit %}
@@ -45,9 +46,27 @@
 
             {% for variante in varianteProduit %}
                 <tr>
-                    <td>{{ variante.core}}</td>
-                    <td>{{ variante.memoire }}</td>
-                    <td>{{ variante.espaceDisque }}</td>
+                    <td style="text-align: center">
+                        {% if variante.core is empty  %}
+                            -
+                        {% else %}
+                            {{ variante.core}}
+                        {% endif %}
+                    </td>
+                    <td style="text-align: center">
+                        {% if variante.memoire is empty  %}
+                            -
+                        {% else %}
+                            {{ variante.memoire }}
+                        {% endif %}
+                    </td>
+                    <td style="text-align: center">
+                        {% if variante.espaceDisque is empty  %}
+                            -
+                        {% else %}
+                            {{ variante.espaceDisque }}
+                        {% endif %}
+                    </td>
                     <td>{{ variante.couleur }}</td>
                     <td>{{ variante.qteStoque }}</td>
                     <td>{{ variante.prix }} €</td>
